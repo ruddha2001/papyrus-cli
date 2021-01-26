@@ -49,7 +49,10 @@
     "bin": "papyrus",
     "plugins": [
       "@oclif/plugin-help"
-    ]
+    ],
+    "hooks": {
+      "prerun": "./lib/hooks/prerun/versionCheck"
+    }
   },
   "repository": "ruddha2001/papyrus-cli",
   "scripts": {
