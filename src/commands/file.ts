@@ -1,4 +1,5 @@
 import Command from "@oclif/command";
+import { uploadHandler } from "../handlers/fileHandler";
 
 export default class File extends Command {
   static args = [
@@ -11,7 +12,7 @@ export default class File extends Command {
     {
       name: "filePath",
       required: false,
-      description: "The file path of the file to be uploaded.",
+      description: "The fully qualified file path of the file to be uploaded.",
     },
   ];
   async run() {
@@ -19,10 +20,12 @@ export default class File extends Command {
     switch (args.operation) {
       case "upload":
         if (!args.filePath) {
-          this.log("You need to enter a valid file path for upload to work.");
+          this.log(
+            "You need to enter a valid fully qualified file path for upload to work."
+          );
           break;
         }
-        this.log(`Upload operation on ${args.filePath}`);
+        await uploadHandler(args.filePath);
         break;
       case "download":
         this.log("Download Operation");
