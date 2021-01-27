@@ -2,6 +2,16 @@ import Command from "@oclif/command";
 import { uploadHandler } from "../handlers/fileHandler";
 
 export default class File extends Command {
+  static description = "transfer a file";
+
+  static examples = [
+    `$ papyrus file upload pathToFile.extension
+Upload Operation
+`,
+    `$ papyrus file download fileKey
+Download Operation
+`,
+  ];
   static args = [
     {
       name: "operation",
