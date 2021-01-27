@@ -1,5 +1,6 @@
 import Command from "@oclif/command";
 import { uploadHandler } from "../handlers/fileHandler";
+import { errorWriter } from "../utilities/customLogger";
 
 export default class File extends Command {
   static description = "transfer a file";
@@ -30,24 +31,16 @@ Download Operation
     const { args } = this.parse(File);
     switch (args.operation) {
       case "upload":
-        if (!args.file) {
-          this.log(
-            "You need to enter a valid fully qualified file path for upload to work."
-          );
-          break;
-        }
         await uploadHandler(args.file);
         break;
       case "download":
-        if (!args.file) {
-          this.log("You need to enter a valid key of the file to download.");
-          break;
-        }
         this.log("Download Operation");
         break;
       default:
         this.log(
-          "Unknown operation mentioned. Please use `papyrus file --help` to know the commands."
+          errorWriter(
+            "Unknown operation mentioned. Please use `papyrus file --help` to get a list of valid commands."
+          )
         );
     }
   }

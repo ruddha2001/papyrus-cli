@@ -1,8 +1,9 @@
 import { Hook } from "@oclif/config";
-import chalk = require("chalk");
+import * as chalk from "chalk";
 
 const hook: Hook<"prerun"> = async function (opts) {
-  const latestVersion = "0.0.0-alpha.1";
+  // TO DO: fetch latest version from the server
+  const latestVersion = "0.0.0-alpha.0";
   if (opts.config.version !== latestVersion)
     process.stdout.write(
       `You are running Papyrus CLI version ` +
