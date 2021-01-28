@@ -1,6 +1,8 @@
 import Command from "@oclif/command";
+import inquirer = require("inquirer");
+import { title } from "process";
 import { uploadHandler } from "../handlers/fileHandler";
-import { errorWriter } from "../utilities/customLogger";
+import { errorWriter, successWriter } from "../utilities/customLogger";
 
 export default class File extends Command {
   static description = "transfer a file";
@@ -31,7 +33,26 @@ Download Operation
     const { args } = this.parse(File);
     switch (args.operation) {
       case "upload":
-        await uploadHandler(args.file);
+        inquirer
+          .prompt([
+            {
+              name: "title",
+              type: "input",
+              message:
+                "What will the title for this file? (This will also be your key to download the file)",
+            },
+          ])
+          .then(async (answers) => {
+            await uploadHandler(answers.title, args.file);
+            this.log(
+              successWriter(
+                `Your have has been upload with the title/key: ${answers.title}`
+              )
+            );
+          })
+          .catch((error) => {
+            this.log(errorWriter(error.message));
+          });
         break;
       case "download":
         this.log("Download Operation");
