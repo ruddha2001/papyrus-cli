@@ -1,3 +1,3 @@
 export const constants = {
-  SERVER_URL: "http://localhost:6000/api",
+  SERVER_URL: "http://localhost:3000/api",
 };
