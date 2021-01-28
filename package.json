@@ -1,7 +1,7 @@
 {
   "name": "papyrus-cli",
   "description": "The only thing you need for data transfering",
-  "version": "0.0.0-alpha.1",
+  "version": "0.1.0-alpha.0",
   "author": "Aniruddha Chatterjee @ruddha2001",
   "bin": {
     "papyrus": "./bin/run"

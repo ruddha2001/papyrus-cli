@@ -4,7 +4,7 @@ import { downloadHandler, uploadHandler } from "../handlers/fileHandler";
 import { errorWriter, successWriter } from "../utilities/customLogger";
 
 export default class File extends Command {
-  static description = "transfer a file";
+  static description = "Transfer any file you want";
 
   static examples = [
     `$ papyrus file upload pathToFile.extension`,
@@ -15,7 +15,7 @@ export default class File extends Command {
       name: "operation",
       required: true,
       description:
-        "Upload or download operation. Enter either 'upload' or 'download'.",
+        "Specify the upload or download operation. Enter either 'upload' or 'download'.",
     },
     {
       name: "file",
