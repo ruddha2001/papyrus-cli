@@ -13,6 +13,7 @@
     "@oclif/plugin-help": "^3",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "form-data": "^3.0.0",
     "tslib": "^1"
   },
   "devDependencies": {
