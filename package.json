@@ -1,7 +1,7 @@
 {
   "name": "papyrus-cli",
   "description": "The only thing you need for data transfering",
-  "version": "0.0.0-alpha.1",
+  "version": "0.1.0-alpha.0",
   "author": "Aniruddha Chatterjee @ruddha2001",
   "bin": {
     "papyrus": "./bin/run"
@@ -11,13 +11,17 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "form-data": "^3.0.0",
+    "inquirer": "^7.3.3",
     "tslib": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
     "@oclif/test": "^1",
     "@types/chai": "^4",
+    "@types/inquirer": "^7.3.1",
     "@types/mocha": "^5",
     "@types/node": "^10",
     "chai": "^4",

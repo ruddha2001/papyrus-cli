@@ -1,40 +1,55 @@
 import Command from "@oclif/command";
-import { uploadHandler } from "../handlers/fileHandler";
-import { errorWriter } from "../utilities/customLogger";
+import inquirer = require("inquirer");
+import { downloadHandler, uploadHandler } from "../handlers/fileHandler";
+import { errorWriter, successWriter } from "../utilities/customLogger";
 
 export default class File extends Command {
-  static description = "transfer a file";
+  static description = "Transfer any file you want";
 
   static examples = [
-    `$ papyrus file upload pathToFile.extension
-Upload Operation
-`,
-    `$ papyrus file download fileKey
-Download Operation
-`,
+    `$ papyrus file upload pathToFile.extension`,
+    `$ papyrus file download title`,
   ];
   static args = [
     {
       name: "operation",
       required: true,
       description:
-        "Upload or download operation. Enter either 'upload' or 'download'.",
+        "Specify the upload or download operation. Enter either 'upload' or 'download'.",
     },
     {
       name: "file",
       required: true,
       description:
-        "The fully qualified file path of the file to be uploaded or the key of the file to be downloaded.",
+        "The path of the file to be uploaded or the title of the file to be downloaded.",
     },
   ];
   async run() {
     const { args } = this.parse(File);
     switch (args.operation) {
       case "upload":
-        await uploadHandler(args.file);
+        inquirer
+          .prompt([
+            {
+              name: "title",
+              type: "input",
+              message: "What will the title for this file?",
+            },
+          ])
+          .then(async (answers) => {
+            await uploadHandler(answers.title, process.cwd(), args.file);
+            this.log(
+              successWriter(
+                `Your have has been upload with the title/key: ${answers.title}`
+              )
+            );
+          })
+          .catch((error) => {
+            this.log(errorWriter(error.message));
+          });
         break;
       case "download":
-        this.log("Download Operation");
+        this.log(await downloadHandler(args.file));
         break;
       default:
         this.log(

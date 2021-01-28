@@ -5,9 +5,9 @@ export const errorWriter = (message: string) => {
 };
 
 export const infoWriter = (message: string) => {
-  return chalk.yellow("Error: ") + message;
+  return chalk.yellow("Info: ") + message;
 };
 
 export const successWriter = (message: string) => {
-  return chalk.green("Error: ") + message;
+  return chalk.green("Success: ") + message;
 };
