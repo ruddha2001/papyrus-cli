@@ -15,3 +15,14 @@ export const uploadHandler = async (title: string, path: string) => {
     console.log(error.message);
   }
 };
+
+export const downloadHandler = async (title: string) => {
+  try {
+    let { data } = await axios.get(
+      constants.SERVER_URL + "/file/download?key=" + title
+    );
+    return data.url;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

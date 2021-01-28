@@ -1,7 +1,7 @@
 import Command from "@oclif/command";
 import inquirer = require("inquirer");
 import { title } from "process";
-import { uploadHandler } from "../handlers/fileHandler";
+import { downloadHandler, uploadHandler } from "../handlers/fileHandler";
 import { errorWriter, successWriter } from "../utilities/customLogger";
 
 export default class File extends Command {
@@ -55,7 +55,7 @@ Download Operation
           });
         break;
       case "download":
-        this.log("Download Operation");
+        this.log(await downloadHandler(args.file));
         break;
       default:
         this.log(
