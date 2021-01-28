@@ -1,6 +1,5 @@
 import Command from "@oclif/command";
 import inquirer = require("inquirer");
-import { title } from "process";
 import { downloadHandler, uploadHandler } from "../handlers/fileHandler";
 import { errorWriter, successWriter } from "../utilities/customLogger";
 
@@ -8,12 +7,8 @@ export default class File extends Command {
   static description = "transfer a file";
 
   static examples = [
-    `$ papyrus file upload pathToFile.extension
-Upload Operation
-`,
-    `$ papyrus file download fileKey
-Download Operation
-`,
+    `$ papyrus file upload pathToFile.extension`,
+    `$ papyrus file download title`,
   ];
   static args = [
     {
@@ -26,7 +21,7 @@ Download Operation
       name: "file",
       required: true,
       description:
-        "The fully qualified file path of the file to be uploaded or the key of the file to be downloaded.",
+        "The path of the file to be uploaded or the title of the file to be downloaded.",
     },
   ];
   async run() {
@@ -38,12 +33,11 @@ Download Operation
             {
               name: "title",
               type: "input",
-              message:
-                "What will the title for this file? (This will also be your key to download the file)",
+              message: "What will the title for this file?",
             },
           ])
           .then(async (answers) => {
-            await uploadHandler(answers.title, args.file);
+            await uploadHandler(answers.title, process.cwd(), args.file);
             this.log(
               successWriter(
                 `Your have has been upload with the title/key: ${answers.title}`
