@@ -40,7 +40,7 @@ export default class File extends Command {
             await uploadHandler(answers.title, process.cwd(), args.file);
             this.log(
               successWriter(
-                `Your have has been upload with the title/key: ${answers.title}`
+                `Your have has been upload with the title: ${answers.title}`
               )
             );
           })
@@ -49,7 +49,7 @@ export default class File extends Command {
           });
         break;
       case "download":
-        this.log(await downloadHandler(args.file));
+        await downloadHandler(args.file, process.cwd());
         break;
       default:
         this.log(
