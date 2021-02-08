@@ -1,7 +1,6 @@
-papyrus-cli
-===========
+# papyrus-cli
 
-The only thing you need for data transfing
+The only thing you need for data transfering
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/papyrus-cli.svg)](https://npmjs.org/package/papyrus-cli)
@@ -9,11 +8,15 @@ The only thing you need for data transfing
 [![License](https://img.shields.io/npm/l/papyrus-cli.svg)](https://github.com/ruddha2001/papyrus-cli/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g papyrus-cli
 $ papyrus COMMAND
@@ -25,11 +28,15 @@ USAGE
   $ papyrus COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`papyrus file OPERATION FILE`](#papyrus-file-operation-file)
-* [`papyrus help [COMMAND]`](#papyrus-help-command)
+
+- [`papyrus file OPERATION FILE`](#papyrus-file-operation-file)
+- [`papyrus help [COMMAND]`](#papyrus-help-command)
 
 ## `papyrus file OPERATION FILE`
 
@@ -66,4 +73,5 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.1/src/commands/help.ts)_
+
 <!-- commandsstop -->
