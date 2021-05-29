@@ -1,6 +1,7 @@
 import Command, { flags } from "@oclif/command";
 import cli from "cli-ux";
 import inquirer = require("inquirer");
+import { handleBrowserLogin } from "../handlers/loginHandler";
 import { errorWriter, infoWriter } from "../utilities/customLogger";
 
 export default class Login extends Command {
@@ -9,7 +10,7 @@ export default class Login extends Command {
   static args = [
     {
       name: "tempToken",
-      required: true,
+      required: false,
       description: "The temporary token generated after the browser login",
     },
   ];
@@ -30,8 +31,7 @@ export default class Login extends Command {
   async run() {
     const { args, flags } = this.parse(Login);
     if (flags.interactive) {
-      this.log(infoWriter("Openning Browser..."));
-      await cli.open("https://aniruddha.net");
+      await handleBrowserLogin();
     } else if (flags.tempToken) {
       // TO DO: Use temporary token to login
       this.log(args.tempToken);
