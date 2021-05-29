@@ -4,16 +4,21 @@ import { join } from "path";
 import * as FormData from "form-data";
 import { constants } from "../constants";
 import { successWriter } from "../utilities/customLogger";
+import { PapyrusLocalFile } from "../types/helper";
 
+/**
+ * Upload a file to the server.
+ * @param {PapyrusLocalFile} localFile The local file object that contains the title and the path of the file as specified by the user
+ * @param {string} currentPath The current working directory of the terminal (needed for path resolution)
+ */
 export const uploadHandler = async (
-  title: string,
-  currentPath: string,
-  path: string
-) => {
+  localFile: PapyrusLocalFile,
+  currentPath: string
+): Promise<void> => {
   try {
-    let finalFilePath = await filePathGenerator(currentPath, path);
+    let finalFilePath = await filePathGenerator(currentPath, localFile.path);
     let formData = new FormData();
-    formData.append("title", title);
+    formData.append("title", localFile.title);
     formData.append("file", createReadStream(finalFilePath));
     await axios.post(constants.SERVER_URL + "/file/upload", formData, {
       headers: formData.getHeaders(),
@@ -23,7 +28,17 @@ export const uploadHandler = async (
   }
 };
 
-const filePathGenerator = async (currentPath: string, path: string) => {
+/**
+ * Validate current path and custom path value and returns the right one.
+ * This helper function allows the user to either specify just the file name (which is there in the current path) or provide the fully qualified file path name.
+ * @param {string} currentPath The current working directory where the terminal is at present
+ * @param {string} path The path name passed on by the user, which may or may not be the fully qualified path name
+ * @returns {Promise<string>} A promise that resolves to the properly determined path
+ */
+const filePathGenerator = async (
+  currentPath: string,
+  path: string
+): Promise<string> => {
   try {
     await fsPromise.readFile(join(currentPath, path));
     return join(currentPath, path);
