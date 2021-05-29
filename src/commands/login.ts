@@ -9,7 +9,7 @@ export default class Login extends Command {
   static args = [
     {
       name: "tempToken",
-      required: true,
+      required: false,
       description: "The temporary token generated after the browser login",
     },
   ];
@@ -30,7 +30,7 @@ export default class Login extends Command {
   async run() {
     const { args, flags } = this.parse(Login);
     if (flags.interactive) {
-      this.log(infoWriter("Openning Browser..."));
+      this.log(infoWriter("Opening Browser..."));
       await cli.open("https://aniruddha.net");
     } else if (flags.tempToken) {
       // TO DO: Use temporary token to login

@@ -1,6 +1,7 @@
 import Command from "@oclif/command";
 import inquirer = require("inquirer");
 import { downloadHandler, uploadHandler } from "../handlers/fileHandler";
+import { PapyrusLocalFile } from "../types/helper";
 import { errorWriter, successWriter } from "../utilities/customLogger";
 
 export default class File extends Command {
@@ -24,6 +25,7 @@ export default class File extends Command {
         "The path of the file to be uploaded or the title of the file to be downloaded.",
     },
   ];
+
   async run() {
     const { args } = this.parse(File);
     switch (args.operation) {
@@ -37,7 +39,13 @@ export default class File extends Command {
             },
           ])
           .then(async (answers) => {
-            await uploadHandler(answers.title, process.cwd(), args.file);
+            await uploadHandler(
+              {
+                title: answers.title,
+                path: args.file,
+              } as PapyrusLocalFile,
+              process.cwd()
+            );
             this.log(
               successWriter(
                 `Your have has been upload with the title: ${answers.title}`
